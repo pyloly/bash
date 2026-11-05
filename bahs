@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <path>"
+    exit 1
+fi
+
+path="$1"
+
+if [ ! -e "$path" ]; then
+    echo "Not found: $path"
+    exit 2
+fi
+
+if [ -d "$path" ]; then
+    echo "Directory"
+elif [ -f "$path" ]; then
+    size=$(wc -c < "$path")
+    echo "File, $size bytes"
+fi
+
+if [ -r "$path" ]; then
+    echo "Readable"
+else
+    echo "Not readable"
+fi
